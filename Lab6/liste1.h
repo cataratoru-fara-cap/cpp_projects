@@ -21,6 +21,18 @@ class LinkedList
         Node <T> *pfirst; //pointeur au premier noeud
         Node <T> *plast; //pointeur au dernier noeud
 
+    void printInverse(){
+        Node <T> *init = plast;
+
+        int i = 0;
+        while (init != NULL)
+        {
+            cout << init->info <<": "<< i <<endl;
+            init = init->prev;
+            i++;        
+        }
+        
+    }
     void addFirst(T x)
     {
         //ajoute info x sur la premiere position
@@ -190,6 +202,30 @@ class LinkedList
 
             delete px;
         }
+    }
+
+    void splitList(){
+        LinkedList <T> p;
+        LinkedList <T> i;
+
+        Node <T> *init = pfirst;
+
+        while (init != NULL)
+        {
+            if (init->info % 2 == 0 )
+            {
+                p.addFirst(init->info);
+            } else {
+                i.addFirst(init->info);
+            }
+            
+            init = init->next;
+        }
+
+        cout << "pare" << endl;
+        p.printInverse();
+        cout<< "impare" << endl;
+        i.printInverse();
     }
 
     int isEmpty()

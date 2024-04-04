@@ -31,9 +31,9 @@ private:
     date D;
 public:
     Message(string sender,string receiver, string content, unsigned int day, unsigned int month, unsigned int year){
-        sender = sender;
-        receiver = receiver;
-        content = content;
+        this->sender = sender;
+        this->receiver = receiver;
+        this->content = content;
         D.day = day;
         D.month = month;
         D.year = year;

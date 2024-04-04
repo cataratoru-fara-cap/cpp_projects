@@ -43,7 +43,7 @@ int main()
 
     sender.putMessage(q, m1);
     cout << q.peek().getContent() << endl;
-    cout << "message" << receiver.openMessage(q).getContent() << endl;
+    cout << "message " << receiver.openMessage(q).getContent() << endl;
     //The calls to the queue work, but the content is void EXCEPT FOR THE DATE???, needs fixing
     return 0;
 }
