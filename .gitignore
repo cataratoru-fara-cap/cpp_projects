@@ -30,3 +30,12 @@
 *.exe
 *.out
 *.app
+#Verify if it is working properly!!!!!
+# Ignore all
+*
+
+# Unignore all with extensions
+!*.*
+
+# Unignore all dirs
+!*/
