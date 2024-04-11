@@ -14,9 +14,10 @@ int main(int argc, char const *argv[])
 
     }
     
-    for (int i = 0; i < 6; i++)
+    for (int i = 5; i >= 0; i--)
     {
-        cout << tab[i] << endl;
+        p = &tab[i];
+        cout << *p << endl;
     }
     
     return 0;
