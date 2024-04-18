@@ -4,7 +4,7 @@
 #include <iostream>
 // http://www.cplusplus.com/reference/queue/queue/
 
-using namespace std
+using namespace std;
 
 template<typename TnodeInfo, typename TedgeInfo>
 class Graph {
@@ -70,7 +70,7 @@ class Graph {
 };
 
 /// changer le constructeur pour obtenir le graphe du ppt
-Graph<char*, int> g(12);
+Graph<char*, int> g(8);
 char* visited;
 
 void dfs(int x) {
@@ -101,16 +101,50 @@ void bfs(int S) {
             }
     }
 }
+
+void biparti(int S) {
+    std::queue<int> Q;
+    int x, y;
+
+    Q.push(S);
+    visited[S] = 1;
+
+    while (!Q.empty()) {
+        x = Q.front();
+		Q.pop();
+        for (y = 0; y < g.N; y++)
+            if (g.A[x][y] && !visited[y]) {
+                visited[y] = 1;
+               Q.push(y);
+            }
+    }
+}
+
 int main() {
+   // Graph<char*, int> g(8); // Use the constructor that takes the number of nodes as an argument
     int i;
     ///ajouter les autres aretes
-    g.addEdge(0, 4);    g.addEdge(2, 4);
+    g.addEdge(0, 4);    
+    g.addEdge(2, 4);
+    g.addEdge(6, 4);
+    g.addEdge(7, 4);
+    g.addEdge(7, 5);
+    g.addEdge(6, 5);
+    g.addEdge(3, 7);
+    g.addEdge(1, 3);
+
 
     visited = new char[g.N];
+
     for (i = 0; i < g.N; i++)
         visited[i] = 0;
+    cout << "Dfs a partir du noeud 4:" <<  endl;
+    dfs(4);
 
-
+    for (i = 0; i < g.N; i++)
+        visited[i] = 0;
+    cout << "Bfs a partir du noeud 4:" <<  endl;
+    bfs(4);
     /// Tester dfs et bfs a partir du noeud 4 dans le code
     /// Tester aussi sur papier et comparer vos resultats
    return 0;
