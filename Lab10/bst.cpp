@@ -211,9 +211,51 @@ template<typename T> class BinarySearchTree {
             }
         }
 
+        void displayMax(){
+            BinarySearchTree<T> *p;
+
+            p = this;
+            while (p->right_son != NULL)
+            {
+                p = p->right_son;
+            }
+
+            cout << *p->pinfo << endl;
+            
+        }
+
+        void RangeQuerySimple(T k1,T k2){
+            if (this == NULL)
+                return;
+            else{
+                if (*pinfo < k1)
+                    right_son->RangeQuerySimple(k1, k2);
+                else if (*pinfo > k2)
+                    left_son->RangeQuerySimple(k1, k2);
+                else {
+                    left_son->RangeQuerySimple(k1, k2);
+                    cout << *pinfo << endl;
+                    right_son->RangeQuerySimple(k1, k2);
+                }
+            }
+        }
+
 };
 
+template <typename T>
+void rotateRight(BinarySearchTree<T>* r)
+{
+    //algo
+    BinarySearchTree<T> *p = r;
+    //r == noveau
+    //p == ancien
 
+    r = p->left_son;
+    p->left_son = r->right_son;
+    r->right_son = p;
+
+    r->displayAllLevels();
+}
 
 int main(){
 
@@ -239,10 +281,11 @@ int main(){
 
 
     cout<<endl;
+
+    r->displayMax();
+
+    cout<<endl;
+    r->RangeQuerySimple('C', 'F');
+
+    rotateRight(r);
 }
-
-
-
-
-
-
