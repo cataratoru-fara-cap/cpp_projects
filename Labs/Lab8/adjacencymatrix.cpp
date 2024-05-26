@@ -70,7 +70,7 @@ class Graph {
 };
 
 /// changer le constructeur pour obtenir le graphe du ppt
-Graph<char*, int> g(7);
+Graph<char*, int> g(8);
 char* visited;
 
 void dfs(int x) {
@@ -124,47 +124,29 @@ int main() {
    // Graph<char*, int> g(8); // Use the constructor that takes the number of nodes as an argument
     int i;
     ///ajouter les autres aretes
-    g.addEdge(0, 1);    
-    g.addEdge(0, 2);    
-    g.addEdge(0, 3);    
-    g.addEdge(3, 2);    
-    g.addEdge(1, 2);    
-    g.addEdge(5, 6);    
-    
+    g.addEdge(0, 4);    
+    g.addEdge(2, 4);
+    g.addEdge(6, 4);
+    g.addEdge(7, 4);
+    g.addEdge(7, 5);
+    g.addEdge(6, 5);
+    g.addEdge(3, 7);
+    g.addEdge(1, 3);
 
 
     visited = new char[g.N];
 
     for (i = 0; i < g.N; i++)
         visited[i] = 0;
-    
-    /* dfs(0);
-    
-    bool connexe = true;
-    for (i = 0; i < g.N; i++){
-        if(visited[i] == 1){
-            cout << "node " << i << " visited" << endl;
-        } else {
-            cout << "node " << i << "Not Visited" << endl;
-            connexe = false;
-        }
-        cout << connexe << endl;
-    } */
-    
-    //implementation to checkn if graph is Hamiltonian
+    cout << "Dfs a partir du noeud 4:" <<  endl;
+    dfs(4);
 
-    //implementation Ex 5 verifie le nombre de composants
-    
-    int conteur = 0;
-    for (i = 0; i < g.N; i++){
-        if(visited[i] == 0){
-            cout << "node " << i << " not visited" << endl;
-            dfs(i);
-            conteur++;
-        }
-    }
-    cout << "nous avons " << conteur << " components" << endl;
-
-    
+    for (i = 0; i < g.N; i++)
+        visited[i] = 0;
+    cout << "Bfs a partir du noeud 4:" <<  endl;
+    bfs(4);
+    /// Tester dfs et bfs a partir du noeud 4 dans le code
+    /// Tester aussi sur papier et comparer vos resultats
+   return 0;
 }
 
