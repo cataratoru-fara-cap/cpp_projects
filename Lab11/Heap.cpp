@@ -11,6 +11,55 @@ template<typename T> class Heap {
             currentDim = -1;
         }
 
+        void filterDown(int i) {
+            T vaux;
+
+            while(i) {
+                int leftChild = 2 * i + 1;
+                int rightChild = 2 * i + 2;
+                int smallest = 1;
+                if(leftChild <= currentDim && H[leftChild] < H[smallest])
+                    smallest = leftChild;
+                if(rightChild <= currentDim && H[rightChild] < H[smallest])
+                    smallest = leftChild;
+
+                if(smallest != i){
+                    vaux = H[i];
+                    H[i] = H[smallest];
+                    H[smallest] = vaux;
+                    i = smallest;
+                } else
+                break;
+            }
+        }
+        int parent(int i){
+            return (i-1) / 2;
+        }
+
+        int leftChild(int i){
+            return 2*i + 1;
+        }
+
+        int rightChild(int i){
+            return 2*i + 2;
+        }
+
+        void displayHeap() {
+            int level = 0;
+            int start = 0;
+            int level_elements = 1;
+            while (start <= currentDim) {
+                cout << "Level " << level << ": ";
+                for (int i = 0; i < level_elements && start <= currentDim; i++) {
+                    cout << H[start] << " ";
+                    start++;
+                }
+                cout << endl;
+                level_elements *= 2;
+                level++;
+            }
+        }
+
         void insertElement(T x) {
             if (currentDim == maxDim-1) {
                 cout<< "Error!"<<endl;
@@ -19,9 +68,9 @@ template<typename T> class Heap {
             currentDim++;
             H[currentDim] = x;
             filterUp(currentDim);
-       }
+        }
 
-	T peek() {
+	    T peek() {
             if (currentDim == -1) {
                 cout<< "Error!"<<endl;
                 T x;
@@ -41,7 +90,7 @@ template<typename T> class Heap {
             T minValue = H[0];
             H[0] = H[currentDim];
             currentDim--;
-     if (currentDim > 0)
+            if (currentDim > 0)
                 filterDown();
 
             return minValue;
@@ -102,7 +151,20 @@ template<typename T> class Heap {
 
 int main() {
     Heap<int> heap(100);
-    //heap.insertElement(25); heap.insertElement(17);
+
+    int elements[] = {25,  17,  36,  2,  3, 100, 1, 17, 19};
+
+    for(int i:elements){
+        heap.insertElement(i);
+    }
+    heap.displayHeap();
+    cout << endl;
+
+    cout << heap.peek() << endl;
+    cout << heap.deleteElement() << endl;
+    cout << heap.deleteElement() << endl;
+    cout << heap.peek() << endl;
+
 
     return 0;
 }
